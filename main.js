@@ -4,8 +4,8 @@ let color = 'rgb(115, 149, 212)';
 let height = 20;
 const generateBarGraph = function() {
 	divs = dataList.map(generateBar);
-	document.getElementById('main').innerHTML = divs.join('');
-	document.getElementById('main').setAttribute('style', 'height : 200px');
+	let element = document.getElementById('main');
+	element.innerHTML = divs.join('');
 };
 
 const generateBar = function(value, index) {
@@ -13,12 +13,12 @@ const generateBar = function(value, index) {
 		"<div onclick = 'performActionOn(this.id)'id = " +
 		index +
 		" style='width: 20px; margin-top:" +
-		(200 - value.y_coordinate * 10) +
-		'px; background:' +
-		color +
+		(400 - value.y_coordinate * 10) +
+		'px; margin-left:20px;background:' +
+		generateRandomColor() +
 		';height : ' +
 		value.y_coordinate * 10 +
-		"px; border : 1px solid black; float : left;'></div><div style='width : 20px;background-color:white;padding:2px; float:left'></div>"
+		"px; border : 1px solid black; float : left;'><div style='width:20px;background-color:white'></div></div>"
 	);
 };
 
@@ -40,4 +40,19 @@ const changeColor = function() {
 	color =
 		'rgb(' + redIntensity + ',' + greenIntensity + ',' + blueIntensity + ')';
 	generateBarGraph();
+};
+
+const getRandomColorValue = function() {
+	return Math.floor(Math.random() * 256);
+};
+const generateRandomColor = function() {
+	return (
+		'rgb(' +
+		getRandomColorValue() +
+		',' +
+		getRandomColorValue() +
+		',' +
+		getRandomColorValue() +
+		')'
+	);
 };
